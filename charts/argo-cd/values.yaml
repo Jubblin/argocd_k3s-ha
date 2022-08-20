@@ -9,3 +9,7 @@ argo-cd:
         - name: argo-cd
           type: helm
           url: https://argoproj.github.io/argo-helm
+  metrics:
+    # -- Deploy metrics service
+    enabled: true
+
