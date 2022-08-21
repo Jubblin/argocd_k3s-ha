@@ -13,3 +13,6 @@ The default username is admin. The password is auto-generated and we can get it 
 kubectl get secret argocd-initial-admin-secret -n argo-cd -o jsonpath="{.data.password}" | base64 -d
 '''
 
+'''
+helm template apps/ | kubectl apply -n argo-cd -f -
+'''
