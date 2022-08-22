@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb
+  name: csi-driver-nfs
   namespace: argo-cd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: metallb-system
+    namespace: kube-system
   project: default
   source:
-    chart: metallb
+    chart: csi-driver-nfs
     helm:
       valueFiles:
-        - ../values/metallb-values.yaml
-    repoURL: https://metallb.github.io/metallb
-    targetRevision: 0.13.4    
+        - ../values/csi-driver-nfs-values.yaml
+    repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+    targetRevision: 4.1.0
   syncPolicy:
     automated:
       prune: true
