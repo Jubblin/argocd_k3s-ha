@@ -1,11 +1,4 @@
-project: manifest-management
-source:
-  repoURL: 'https://github.com/Jubblin/argocd_k3s-ha.git'
-  path: manifests/namespaces
-  targetRevision: HEAD
-destination:
-  server: 'https://kubernetes.default.svc'
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: traefik-system
