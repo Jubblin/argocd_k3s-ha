@@ -1,20 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik
+  name: heimdall
   namespace: argo-cd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: traefik-system
+    namespace: default
   project: default
   source:
-    chart: traefik
+    chart: heimdall
     helm:
-    repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.24.0
+      values: |
+        env:
+          TZ: Europe/London
+        persistence:
+          config:
+            enabled: true
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 8.4.2
   syncPolicy:
     automated:
       prune: true
