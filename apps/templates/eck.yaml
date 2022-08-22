@@ -9,7 +9,7 @@ spec:
     namespace: elastic-system
   project: default
   source:
-    chart: elastic-operator
+    chart: eck-operator
     helm:
     repoURL: https://helm.elastic.co
     targetRevision: 2.3.0
