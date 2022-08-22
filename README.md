@@ -7,7 +7,7 @@ helm repo update
 helm upgrade cilium cilium/cilium --install \
   --version 1.12.1 \
   --namespace kube-system \
-  -f cilium-values.yaml 
+  -f cilium-values.yaml
 '''
 
 '''
@@ -38,4 +38,5 @@ kubectl get secret argocd-initial-admin-secret -n argo-cd -o jsonpath="{.data.pa
 
 '''
 helm template apps/ | kubectl apply -n argo-cd -f -
+kubectl delete secret -l owner=helm,name=argo-cd
 '''
