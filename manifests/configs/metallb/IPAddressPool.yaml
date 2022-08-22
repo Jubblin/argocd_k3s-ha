@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: vl250
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.3.250.1-10.3.250.250
