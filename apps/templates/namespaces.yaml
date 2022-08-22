@@ -9,7 +9,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-  project: manifest-management
+  project: default
   source:
     path: manifests/namespaces
     repoURL: https://github.com/Jubblin/argocd_k3s-ha.git
