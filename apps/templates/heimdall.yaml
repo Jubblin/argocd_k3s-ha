@@ -13,8 +13,12 @@ spec:
   source:
     chart: heimdall
     helm:
-      valueFiles:
-        - ../values/heimdall-values.yaml
+      values: |
+        env:
+          TZ: Europe/London
+        persistence:
+          config:
+            enabled: true
     repoURL: https://k8s-at-home.com/charts/
     targetRevision: 8.4.2
   syncPolicy:
