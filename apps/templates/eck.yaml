@@ -14,7 +14,7 @@ spec:
     chart: elastic-operator
     helm:
     repoURL: https://helm.elastic.co
-    targetRevision: 8.4.2
+    targetRevision: 2.3.0
   syncPolicy:
     automated:
       prune: true
