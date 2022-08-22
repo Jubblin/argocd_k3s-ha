@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: csi-driver-nfs
+  name: heimdall
   namespace: argo-cd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: elastic-system
   project: default
   source:
-    chart: csi-driver-nfs
+    chart: elastic-operator
     helm:
-    repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-    targetRevision: 4.1.0
+    repoURL: https://helm.elastic.co
+    targetRevision: 8.4.2
   syncPolicy:
     automated:
       prune: true
