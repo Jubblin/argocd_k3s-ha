@@ -1,4 +1,20 @@
-kind: Namespace
-apiVersion: v1
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: traefik-system
+  name: namespaces
+  namespace: argo-cd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: manifest-management
+  source:
+    path: manifests/namespaces
+    repoURL: https://github.com/Jubblin/argocd_k3s-ha.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
