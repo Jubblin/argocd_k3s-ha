@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: heimdall
+  namespace: default
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: default
+  source:
+    chart: heimdall
+    helm:
+      valueFiles:
+        - ../values/heimdall-values.yaml
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 8.4.2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
