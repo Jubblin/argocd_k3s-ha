@@ -2,6 +2,8 @@ argo-cd:
   dex:
     enabled: false
   server:
+    service:
+      type: LoadBalancer
     extraArgs:
     - --insecure
     config:
@@ -12,4 +14,3 @@ argo-cd:
   metrics:
     # -- Deploy metrics service
     enabled: true
-
