@@ -13,8 +13,6 @@ spec:
   source:
     chart: metallb
     helm:
-      valueFiles:
-        - ../values/metallb-values.yaml
     repoURL: https://metallb.github.io/metallb
     targetRevision: 0.13.4    
   syncPolicy:
