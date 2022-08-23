@@ -14,7 +14,7 @@ spec:
       values: |
         additionalArguments:
           - "--certificatesresolvers.letsencrypt.acme.email=richard@worwood.com"
-          - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+          - "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
           - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=route53"
@@ -22,6 +22,11 @@ spec:
           - "--api.insecure=true"
           - "--accesslog=true"
           - "--log.level=INFO"
+
+        ports:
+          web:
+            redirectTo: websecure
+
         env:
           - name: AWS_SECRET_ACCESS_KEY
             valueFrom:
@@ -38,6 +43,17 @@ spec:
               secretKeyRef:
                 name: route53
                 key: aws_hosted_zone_id
+
+        ingressRoute:
+          dashboard:
+            enabled: false
+
+        persistence:
+          enabled: true
+          storageClass: nfs-csi
+          path: /certs
+          size: 128Mi
+
         pilot:
           enabled: true
           token:
@@ -46,6 +62,10 @@ spec:
                 name: traefik-pilot
                 key: pilot_token
           dashboard: true
+
+        podSecurityPolicy:
+          enabled: false
+
     repoURL: https://helm.traefik.io/traefik
     targetRevision: 10.24.0
   syncPolicy:
