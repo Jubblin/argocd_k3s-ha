@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-config
+  namespace: argo-cd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  project: default
+  source:
+    path: manifests/configs/argo-cd
+    repoURL: https://github.com/Jubblin/argocd_k3s-ha.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
