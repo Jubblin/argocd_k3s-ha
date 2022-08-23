@@ -11,6 +11,41 @@ spec:
   source:
     chart: traefik
     helm:
+      values: |
+        additionalArguments:
+          - "--certificatesresolvers.letsencrypt.acme.email=richard@worwood.com"
+          - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+          - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+          - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
+          - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=route53"
+          - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+          - "--api.insecure=true"
+          - "--accesslog=true"
+          - "--log.level=INFO"
+        env:
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: route53
+                key: aws_secret_access_key
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: route53
+                key: aws_access_key_id
+          - name: AWS_HOSTED_ZONE_ID
+            valueFrom:
+              secretKeyRef:
+                name: route53
+                key: aws_hosted_zone_id
+        pilot:
+          enabled: true
+          token:
+            valueFrom:
+              secretKeyRef:
+                name: traefik-pilot
+                key: pilot_token
+          dashboard: true
     repoURL: https://helm.traefik.io/traefik
     targetRevision: 10.24.0
   syncPolicy:
