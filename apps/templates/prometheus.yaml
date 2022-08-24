@@ -24,8 +24,12 @@ spec:
                       storage: 50Gi
         grafana:
           defaultDashboardsTimezone: Europe/London
+          service:
+            type: LoadBalancer
         prometheus:
           enabled: true
+          service:
+            type: LoadBalancer
           prometheusSpec:
             storageSpec:
               volumeClaimTemplate:
