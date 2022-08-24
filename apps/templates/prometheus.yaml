@@ -44,58 +44,58 @@ spec:
                     requests:
                       storage: 50Gi
             additionalScrapeConfigs:
-              - job_name: 'kubernetes-pods'
-                kubernetes_sd_configs:
-                - role: pod
-                relabel_configs:
-                  - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-                    action: keep
-                    regex: true
-                  - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-                    action: replace
-                    regex: (.+):(?:\d+);(\d+)
-                    replacement: ${1}:${2}
-                    target_label: __address__
-              - job_name: 'kubernetes-endpoints'
-                scrape_interval: 30s
-                kubernetes_sd_configs:
-                  - role: endpoints
-                relabel_configs:
-                  - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-                    action: keep
-                    regex: true
-                  - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
-                    action: replace
-                    target_label: __address__
-                    regex: (.+)(?::\d+);(\d+)
-                    replacement: $1:$2
-              - job_name: kube-etcd
-                kubernetes_sd_configs:
-                  - role: node
-                scheme: https
-                tls_config:
-                  ca_file:   /etc/prometheus/secrets/etcd-client-cert/etcd-ca
-                  cert_file: /etc/prometheus/secrets/etcd-client-cert/etcd-client
-                  key_file:  /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
-                relabel_configs:
-                - action: labelmap
-                  regex: __meta_kubernetes_node_label_(.+)
-                - source_labels: [__address__]
-                  action: replace
-                  targetLabel: __address__
-                  regex: ([^:;]+):(\d+)
-                  replacement: ${1}:2379
-                - source_labels: [__meta_kubernetes_node_name]
+            - job_name: 'kubernetes-pods'
+              kubernetes_sd_configs:
+              - role: pod
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
                   action: keep
-                  regex: .*mst.*
-                - source_labels: [__meta_kubernetes_node_name]
+                  regex: true
+                - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
                   action: replace
-                  targetLabel: node
-                  regex: (.*)
-                  replacement: ${1}
-                metric_relabel_configs:
-                - regex: (kubernetes_io_hostname|failure_domain_beta_kubernetes_io_region|beta_kubernetes_io_os|beta_kubernetes_io_arch|beta_kubernetes_io_instance_type|failure_domain_beta_kubernetes_io_zone)
-                  action: labeldrop
+                  regex: (.+):(?:\d+);(\d+)
+                  replacement: ${1}:${2}
+                  target_label: __address__
+            - job_name: 'kubernetes-endpoints'
+              scrape_interval: 30s
+              kubernetes_sd_configs:
+                - role: endpoints
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+                  action: keep
+                  regex: true
+                - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+                  action: replace
+                  target_label: __address__
+                  regex: (.+)(?::\d+);(\d+)
+                  replacement: $1:$2
+            - job_name: kube-etcd
+              kubernetes_sd_configs:
+                - role: node
+              scheme: https
+              tls_config:
+                ca_file:   /etc/prometheus/secrets/etcd-client-cert/etcd-ca
+                cert_file: /etc/prometheus/secrets/etcd-client-cert/etcd-client
+                key_file:  /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
+              relabel_configs:
+              - action: labelmap
+                regex: __meta_kubernetes_node_label_(.+)
+              - source_labels: [__address__]
+                action: replace
+                targetLabel: __address__
+                regex: ([^:;]+):(\d+)
+                replacement: ${1}:2379
+              - source_labels: [__meta_kubernetes_node_name]
+                action: keep
+                regex: .*mst.*
+              - source_labels: [__meta_kubernetes_node_name]
+                action: replace
+                targetLabel: node
+                regex: (.*)
+                replacement: ${1}
+              metric_relabel_configs:
+              - regex: (kubernetes_io_hostname|failure_domain_beta_kubernetes_io_region|beta_kubernetes_io_os|beta_kubernetes_io_arch|beta_kubernetes_io_instance_type|failure_domain_beta_kubernetes_io_zone)
+                action: labeldrop
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 39.9.0
   syncPolicy:
