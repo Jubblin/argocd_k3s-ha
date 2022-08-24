@@ -1,18 +1,23 @@
-kind: Ingress
 apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: whoami
   namespace: dev
+  annotations:
+    # kubernetes.io/tls-acme: "true"
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    konghq.com/plugins: request-id
+    kubernetes.io/ingress.class: kong
 spec:
-  ingressClassname: kong
+  # tls:
+  # - secretName: whoami_n6_bonkie_net_tls
+  #   hosts:
+  #   - whoami.n6.bonkie.net
   rules:
-    - host: whoami.n6.bonkie.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: whoami
-                port:
-                  number: 80
+  - host: whoami.n6.bonkie.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: whoami
+          servicePort: 80
