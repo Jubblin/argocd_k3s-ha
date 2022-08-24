@@ -3,11 +3,8 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: whoami
   namespace: dev
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    kubernetes.io/ingress.class: traefik-external
-
 spec:
+  ingressClassname: kong
   rules:
     - host: whoami.n6.bonkie.net
       http:
