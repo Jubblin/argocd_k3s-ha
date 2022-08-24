@@ -10,10 +10,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`elastic.n6.bonkie.net`)
-    kind: Rule
-    services:
-    - name: quick-es-http
-      port: 9200
+    - match: Host(`elastic.n6.bonkie.net`)
+      kind: Rule
+      services:
+      - name: quick-es-http
+        port: 9200
   tls:
     certResolver: letsencrypt
