@@ -11,9 +11,9 @@ spec:
   source:
     chart: eck-operator
     helm:
-      installCRDs: true
-      prometheus:
-        enabled: true
+      # installCRDs: true
+      # prometheus:
+      #   enabled: true
     repoURL: https://charts.jetstack.io
     targetRevision: 1.9.1
   syncPolicy:
