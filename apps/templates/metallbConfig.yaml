@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: netallb-system
+    namespace: metallb-system
   project: default
   source:
     path: manifests/configs/metallb
