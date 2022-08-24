@@ -3,6 +3,8 @@ kind: IngressRoute
 metadata:
   name: argocd-server
   namespace: argo-cd
+  labels:
+    app: kubed
 spec:
   entryPoints:
     - websecure
