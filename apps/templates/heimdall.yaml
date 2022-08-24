@@ -20,7 +20,7 @@ spec:
           config:
             enabled: true
             storageClass: nfs-csi
-    repoURL: https://k8s-at-home.com/charts/
+    repoURL: https://k8s-at-home.com/charts
     targetRevision: 8.4.2
   syncPolicy:
     automated:
