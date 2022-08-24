@@ -4,15 +4,8 @@ metadata:
   name: whoami
   namespace: dev
   annotations:
-    # kubernetes.io/tls-acme: "true"
-    # cert-manager.io/cluster-issuer: letsencrypt-prod
-    konghq.com/plugins: request-id
     kubernetes.io/ingress.class: kong
 spec:
-  # tls:
-  # - secretName: whoami_n6_bonkie_net_tls
-  #   hosts:
-  #   - whoami.n6.bonkie.net
   rules:
   - host: whoami.n6.bonkie.net
     http:
