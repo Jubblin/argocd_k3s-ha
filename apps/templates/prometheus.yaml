@@ -26,6 +26,10 @@ spec:
           defaultDashboardsTimezone: Europe/London
           service:
             type: LoadBalancer
+          dashboards:
+            - 16611
+            - 16612
+            - 16613
         prometheus:
           enabled: true
           service:
