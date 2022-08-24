@@ -12,6 +12,10 @@ spec:
     chart: traefik
     helm:
       values: |
+        providers:
+          kubernetesCRD:
+            ingressClass: traefik-external
+
         additionalArguments:
           - "--certificatesresolvers.letsencrypt.acme.email=richard@worwood.com"
           - "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
