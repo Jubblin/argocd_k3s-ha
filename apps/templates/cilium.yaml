@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argo-cd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  project: default
+  source:
+    chart: cilium
+    helm:
+      values: |
+        rollOutCiliumPods: true
+        ingressController:
+          enabled: true
+          enforceHttps: true
+          secretsNamespace:
+            create: true
+            name: cilium-secrets
+            sync: true
+
+        hubble:
+          enabled: true
+          eventBufferCapacity: "4095"
+          metrics:
+            enabled:
+              - dns
+              - drop
+              - tcp
+              - flow
+              - icmp
+              - http
+          relay:
+            enabled: true
+            rollOutPods: true
+          prometheus:
+            enabled: true
+              port: 9966
+              serviceMonitor:
+                # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/master/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
+                enabled: false
+                labels: {}
+                annotations: {}
+                interval: "10s"
+                # -- Specify the Kubernetes namespace where Prometheus expects to find service monitors configured.
+                # namespace: ""
+          relay:
+            enabled: true
+        proxy:
+          prometheus:
+            enabled: false
+            port: "9964"
+        wellKnownIdentities:
+          enabled: true
+        operator:
+          prometheus:
+            enabled: true
+            port: 9963
+            serviceMonitor:
+              # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/master/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
+              enabled: false
+              labels: {}
+              annotations: {}
+
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.12.1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
