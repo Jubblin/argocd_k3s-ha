@@ -37,7 +37,9 @@ spec:
       containers:
         - name: system-upgrade-controller
           image: rancher/system-upgrade-controller:v0.8.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: true
           envFrom:
             - configMapRef:
                 name: default-controller-env
