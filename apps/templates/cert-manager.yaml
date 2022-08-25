@@ -11,6 +11,10 @@ spec:
   source:
     chart: cert-manager
     helm:
+      values: |
+        installCRDs: true
+        prometheus:
+          enabled: true
     repoURL: https://charts.jetstack.io
     targetRevision: 1.9.1
   syncPolicy:
