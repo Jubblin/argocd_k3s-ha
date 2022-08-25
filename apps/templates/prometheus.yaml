@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus
+    namespace: prom
   project: default
   source:
     chart: kube-prometheus-stack

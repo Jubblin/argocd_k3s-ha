@@ -7,3 +7,7 @@ spec:
   count: 1
   elasticsearchRef:
     name: quick
+  http:
+  service:
+    spec:
+      type: LoadBalancer

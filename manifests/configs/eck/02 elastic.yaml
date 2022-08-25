@@ -5,6 +5,10 @@ metadata:
   namespace: eck
 spec:
   version: 8.3.3
+  http:
+    service:
+      spec:
+        type: LoadBalancer
   nodeSets:
   - name: bonkie
     count: 1
