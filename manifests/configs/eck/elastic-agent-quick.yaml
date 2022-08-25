@@ -1,0 +1,19 @@
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: elastic-agent-quick
+  namespace: eck
+spec:
+  version: 8.4.0
+  kibanaRef:
+    name: quick
+  fleetServerRef:
+    name: fleet-server-quick
+  mode: fleet
+  daemonSet:
+    podTemplate:
+      spec:
+        serviceAccountName: elastic-agent
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0
