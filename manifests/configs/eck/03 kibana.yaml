@@ -8,6 +8,6 @@ spec:
   elasticsearchRef:
     name: quick
   http:
-  service:
-    spec:
-      type: LoadBalancer
+    service:
+      spec:
+        type: LoadBalancer
