@@ -1,6 +1,13 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: '2.1.158' # change to tag or sha
+  hooks:
+    - id: checkov
+      verbose: true
+      args: [-d apps/templates/]
+
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
