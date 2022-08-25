@@ -12,6 +12,7 @@ spec:
     chart: traefik
     helm:
       values: |
+        # checkov:skip=CKV_SECRET_6: helm file values
         providers:
           kubernetesCRD:
             ingressClass: traefik-external
