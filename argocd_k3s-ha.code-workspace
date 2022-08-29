@@ -1,9 +1,12 @@
 {
 	"folders": [
-		{
-			"path": "."
-		}
-	],
+    {
+      "path": "."
+    },
+    {
+      "path": "../argocd_media"
+    }
+  ],
   "settings": {
     "makefile.extensionOutputFolder": "./.vscode"
   }
