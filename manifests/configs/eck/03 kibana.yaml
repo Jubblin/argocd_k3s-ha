@@ -10,7 +10,7 @@ spec:
   http:
     service:
       spec:
-        type: LoadBalancer
+        type: ClusterIP
   config:
     xpack.fleet.agents.elasticsearch.hosts: ["https://quick-es-http.default.svc:9200"]
     xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-quick-agent-http.default.svc:8220"]
