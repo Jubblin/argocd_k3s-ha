@@ -15,7 +15,7 @@ spec:
         driver:
           enabled: false
     repoURL: https://helm.ngc.nvidia.com/nvidia
-    targetRevision: v1.11.1
+    targetRevision: 1.11.1
   syncPolicy:
     automated:
       prune: true
