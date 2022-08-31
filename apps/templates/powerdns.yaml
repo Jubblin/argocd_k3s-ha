@@ -9,7 +9,7 @@ spec:
     namespace: powerdns
   project: default
   source:
-    repoURL: https://github.com/cdwv/powerdns-helm.git
+    repoURL: https://github.com/Jubblin/powerdns-helm.git
     targetRevision: HEAD
     path: ./
     helm:
@@ -19,11 +19,11 @@ spec:
             key: PowerDNSAPI
           dnsupdate:
             enabled: yes
-        replicaCount: 2
-        service:
-          type: LoadBalancer
-        ingress:
-          enabled: false
+          replicaCount: 2
+          service:
+            type: LoadBalancer
+          ingress:
+            enabled: false
         mariadb:
           master:
             persistence:

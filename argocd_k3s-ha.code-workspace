@@ -5,6 +5,9 @@
     },
     {
       "path": "../argocd_media"
+    },
+    {
+      "path": "../../GitHub/powerdns-helm"
     }
   ],
   "settings": {
