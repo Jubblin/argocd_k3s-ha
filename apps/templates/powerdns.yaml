@@ -9,7 +9,6 @@ spec:
     namespace: powerdns
   project: default
   source:
-    path: charts/powerdns-helm
     repoURL: https://github.com/cdwv/powerdns-helm.git
     targetRevision: HEAD
     helm:
