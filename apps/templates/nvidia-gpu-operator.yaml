@@ -14,7 +14,7 @@ spec:
       values: |
         driver:
           enabled: false
-    repoURL: https://helm.ngc.nvidia.com/nvidia
+    repoURL: https://nvidia.github.io/gpu-operator
     targetRevision: 1.11.1
   syncPolicy:
     automated:
