@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: powerdns
+  namespace: argo-cd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: powerdns
+  project: default
+  source:
+    path: charts/powerdns-helm
+    repoURL: https://github.com/cdwv/powerdns-helm.git
+    targetRevision: HEAD
+    helm:
+      values: |
+        pdns:
+          api:
+            key: PowerDNSAPI
+          dnsupdate:
+            enabled: yes
+        replicaCount: 2
+        service:
+          type: LoadBalancer
+        ingress:
+          enabled: false
+        mariadb:
+          master:
+            persistence:
+              storageClass: nfs-csi
+              size: 16Gi
+          slave:
+            persistence:
+              storageClass: nfs-csi
+              size: 16Gi
+          metrics:
+            enabled: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
