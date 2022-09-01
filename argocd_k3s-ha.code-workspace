@@ -8,6 +8,9 @@
     },
     {
       "path": "../../GitHub/powerdns-helm"
+    },
+    {
+      "path": "../bonkie"
     }
   ],
   "settings": {
